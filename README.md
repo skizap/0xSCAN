@@ -1,7 +1,7 @@
 # 0xSCAN
  0xSCAN website scanner
  
- ![alt text](https://media.giphy.com/media/144WPQcOXjL4pa/giphy.gif)
+![alt text](https://media.giphy.com/media/144WPQcOXjL4pa/giphy.gif)
 
 # screenshot
 
