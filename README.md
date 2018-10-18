@@ -1,20 +1,17 @@
 # 0xSCAN
  0xSCAN website scanner
- 
-![alt text](https://i.imgur.com/gjv5CaH.gif)
 
 # screenshot
 
-![alt text](https://github.com/0xAbdullah/0xSCAN/blob/master/Screenshot.gif)
+![alt text](https://github.com/0xAbdullah/0xSCAN/blob/master/Screenshot.png)
 
 # Usage
 ```bash
-python 0xscan.py -s example.com
+python3 0xscan.py -d example.com
 
 ```
-# Coded By
-Abdullah AlZahrani
-
-Website: www.0xa.tech
-
-Twitter : 0xAbdullah
+# Developed by
+``` bash
+Abdullah Alzahrani | Twitter: @0xAbdullah
+Saud Alanzi | Twitter: @Dmaral3noz
+```
