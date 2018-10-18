@@ -1,195 +1,152 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# 0xScan v1.0
-# Coded By: Abdullah AlZahrani (0xAbdullah)
+# 0xScan v2.0
+# Developed by: Abdullah Alzahrani and Saud Alanzi
 
-import urllib, urllib2, requests
-import lxml.html
-import socket
-import os, sys, re, argparse
-import threading
-from BeautifulSoup import BeautifulSoup
+import argparse, requests, sys, re
+
+print("""\n           \033[1;33mDeveloped by: Abdullah Alzahrani and Saud Alanzi\033[1;m \033[1;31m
+          ______            ______   ______   ______  __    __ 
+         /      \          /      \ /      \ /      \/  \  /  |
+        /$$$$$$  |__v2.0__/$$$$$$  /$$$$$$  /$$$$$$  $$  \ $$ |
+        $$$  \$$ /  \  /  $$ \__$$/$$ |  $$/$$ |__$$ $$$  \$$ |
+        $$$$  $$ $$  \/$$/$$      \$$ |     $$    $$ $$$$  $$ |
+        $$ $$ $$ |$$  $$<  $$$$$$  $$ |   __$$$$$$$$ $$ $$ $$ |
+        $$ \$$$$ |/$$$$  \/  \__$$ $$ \__/  $$ |  $$ $$ |$$$$ |
+        $$   $$$//$$/ $$  $$    $$/$$    $$/$$ |  $$ $$ | $$$ |
+         $$$$$$/ $$/   $$/ $$$$$$/  $$$$$$/ $$/   $$/$$/   $$/ \033[1;m
+         \033[1;30mAbdullah\033[1;m = {'\033[1;36mTwiiter\033[1;m': '\033[1;36m@0xAbdullah\033[1;m',  'GitHub.com': '0xAbdullah'} 
+         \033[1;30mSaud\033[1;m = {'\033[1;36mTwitter\033[1;m': '\033[1;36m@Dmaral3noz\033[1;m', 'GitHub.com': 'Dmaral3noz'}""")
 
 
+parser = argparse.ArgumentParser(description="\033[1;33m[--]\033[1;m 0xSCAN website scanner")
+parser.add_argument('-d', required=True, default=None, help='Target Website.')
 
-print '''
-    0xScan v1.0 Coded By: Abdullah AlZahrani
-   ___           ____     ____      _      _   _
-  / _ \  __  __ / ___|   / ___|    / \    | \ | |
- | | | | \ \/ / \___ \  | |       / _ \   |  \| |
- | |_| |  >  <   ___) | | |___   / ___ \  | |\  |
-  \___/  /_/\_\ |____/   \____| /_/   \_\ |_| \_|
-    Twitter: @0xAbdullah | GitHub.com/0xAbdullah'''
-
-if len(sys.argv) == 1:
-        print "\n\n\033[1;33m[!] Usage: python 0xscan.py -s example.com\033[1;m"
-        sys.exit(1)
-
-parser = argparse.ArgumentParser(description="0xScan is website scanner")
-parser.add_argument( '-s', required=True, default=None, help='target domain')
 args = vars(parser.parse_args())
 
-target = args['s']
-
-if target.startswith("http"):
-    print "\n\n\033[1;33m[!] Enter Just Domain // ex: example.com\033[1;m"
+if len(sys.argv) == 1:
+    print("[\033[1;33m--\033[1;m] Usage: python3 0xscan.py -d example.com")
     sys.exit()
-headers = { 'User-Agent' : 'Mozilla/5.0' }
 
-IP = socket.gethostbyname(target)
+host = args['d']
+if host.startswith('http'):
+    sys.exit("\n\n\033[1;33m[ERROR] Enter domain name\n[EXAMPLE] python3 0xscan.py -d example.com\033[1;m ")
 
-r = requests.get("http://"+target, headers = headers)
-print "\n[-] ./HTTP Headers"
-print "[--] IP: %s" % (IP)
-print "[--] Domain: %s" % (target)
-print "[--] Webserver: %s" % (r.headers["server"])
-try:
-    print "[--] X-Powered: %s" % (r.headers["X-Powered-By"])
-    print "[--] Content-Encoding: %s" % (r.headers["Content-Encoding"])
-    print "[--] Connection: %s" % (r.headers["Connection"])
-    print "[--] Transfer-Encoding: %s" % (r.headers["Transfer-Encoding"])
-    print "[--] Link: %s" % (r.headers["Link"])
-except:
-    pass
+## ./START Scan common ports ##
+def commonPorts():
+    requ = requests.post("https://www.portcheckers.com/portscan-result", data={'server': host, "quick": "false"})
+    resp = requ.text
+    output = re.sub('<pre>|\t|</pre>|<div style="margin:10px 0 20px 0;"><h3>Port Scan Result</h3>|'
+                    '<span style="display: inline-block;width:200px;">|</span><span class="label label-danger">|</span>'
+                    '|<span class="label label-success">|', '', resp).strip().lstrip()
 
-########### ./Start DEC ###########
-print "\n[-] ./Directory Exists Check"
-FEcheck = open("data/Directory", "r")
+    output = output.replace("Not Available", " Not Available")
+    print("├── Host: 127.0.0.1")
+    for lines in str(output).splitlines():
+        print("\t├── {}".format(lines))
+## ./END Scan common ports ##
 
-def DEC():
-    """thread DFC function"""
-    for Path in FEcheck:
-        Path = Path.strip()
-        try:
-            check = requests.head("http://"+target+"/"+Path)
-            if check.status_code == 200:
-                print "[--] http://%s/%s" % (target, Path)
-        except:
-            pass
-    return
+## ./START Reverse IP ##
+def reverseIP():
+    requ = requests.get("https://api.hackertarget.com/reverseiplookup/?q="+host)
+    resp = requ.text
+    output = resp
+    print("├── Host: {}".format(host))
+    for lines in str(output).splitlines():
+        print("\t├── {}".format(lines))
+## ./END Reverse IP ##
 
-threads = []
-for i in range(99):
-    t = threading.Thread(target=DEC)
-    threads.append(t)
-    t.start()
-t.join()
-########### ./End DEC ###########
+## ./START http Header ##
+def httpHeader():
+    requ = requests.get("https://api.hackertarget.com/httpheaders/?q="+host)
+    resp = requ.text
+    output = resp.strip().lstrip()
+    print("├── Host: {}".format(host))
+    for lines in str(output).splitlines():
+        print("\t├── {}".format(lines))
+## ./END http Header ##
 
-########### ./Start FEC ###########
-print "\n[-] ./File Exists Check"
-FEcheck = open("data/Files", "r")
+## ./START TCP Port Scan ##
+def TCPport():
+    requ = requests.get("https://api.hackertarget.com/nmap/?q="+host)
+    resp = requ.text
+    output = resp.strip().lstrip()
+    print("├── Host: {}".format(host))
+    for lines in str(output).splitlines():
+        print("\t├── {}".format(lines))
+## ./END TCP Port Scan ##
 
-def FEC():
-    """thread DFC function"""
-    for Path in FEcheck:
-        Path = Path.strip()
-        try:
-            check = requests.head("http://"+target+"/"+Path)
-            if check.status_code == 200:
-                print "[--] http://%s/%s" % (target, Path)
-        except:
-            pass
-    return
+## ./START Extract Links from Page ##
+def ELFP():
+    requ = requests.get("https://api.hackertarget.com/pagelinks/?q="+host)
+    resp = requ.text
+    output = resp.strip().lstrip()
+    print("├── Host: {}".format(host))
+    for lines in str(output).splitlines():
+        print("\t├── {}".format(lines))
+## ./END Extract Links from Page ##
 
-threads = []
-for i in range(99):
-    t = threading.Thread(target=FEC)
-    threads.append(t)
-    t.start()
-t.join()
-########### ./End FEC ###########
+## ./START Extract Links from Page ##
+def IPlocation():
+    requ = requests.get("https://api.hackertarget.com/geoip/?q="+host)
+    resp = requ.text
+    output = resp.strip().lstrip()
+    print("├── Host: {}".format(host))
+    for lines in str(output).splitlines():
+        print("\t├── {}".format(lines))
 
-########### ./Start FAP ###########
-print "\n[-] ./Find Admin Page"
-FEcheck = open("data/Admin", "r")
+## ./END Extract Links from Page ##
 
-def FAP():
-    """thread FAP function"""
-    for Path in FEcheck:
-        Path = Path.strip()
-        try:
-            check = requests.head("http://"+target+"/"+Path)
-            if check.status_code == 200:
-                print "[--] http://%s/%s" % (target, Path)
-        except:
-            pass
-    return
+## ./START DNS lookup ##
+def DNSlookup():
+    requ = requests.get("https://api.hackertarget.com/dnslookup/?q="+host)
+    resp = requ.text
+    output = re.sub(';; Truncated, retrying in TCP mode.', '', resp).strip().lstrip()
+    print("├── Host: {}".format(host))
+    for lines in str(output).splitlines():
+        print("\t├── {}".format(lines))
+## ./END DNS lookup ##
 
-threads = []
-for i in range(50):
-    t = threading.Thread(target=FAP)
-    threads.append(t)
-    t.start()
-t.join()
-########### ./End FAP ###########
+def main():
+    print('''
+├── Enter Number
+\t├──[1] Nmap | TCP Port Scan
+\t├──[2] Scan common ports
+\t├──[3] Reverse IP
+\t├──[4] HTTP Header
+\t├──[5] DNS lookup
+\t├──[6] IP Location
+\t├──[7] Extract Links from Page
+\t├──[8] Does it use Cloudflare
+\t├──[0]\033[1;31m EXIT\033[1;m''')
 
-########### ./Start ELP ###########
-print "\n[-] ./Extract Links from Page"
-try:
-    req = urllib2.Request('http://'+target, None, headers)
-    html_page = urllib2.urlopen(req)
-    soup = BeautifulSoup(html_page)
-    for link in soup.findAll('a', attrs={'href': re.compile("^http://")}):
-        print "[--] "+link.get('href')
-except:
-    print "[--] Not Found!"
-########### ./End ELP ###########
+    chose = int(input('\t└─  '))
 
-
-print "\n[-] ./SQL Injection Scan"
-Found = 0
-connection = urllib.urlopen("https://www.bing.com/search?q=ip:"+IP+" php?id=", None, headers)
-dom =  lxml.html.fromstring(connection.read())
-for url in dom.xpath('//a/@href'):
-    url = url.strip()
-    BlackList = "https://go.microsoft", "http://go.microsoft", "http://www.microsofttranslator.com"
-    if url.startswith(BlackList):
-        pass
-    elif not url.startswith('http://') or url.startswith('https://') or url.startswith('www.'):
-        pass
-    elif not "=" in url:
-        pass
+    if chose == 1:
+        TCPport()
+    elif chose == 2:
+        commonPorts()
+    elif chose == 3:
+        reverseIP()
+    elif chose == 4:
+        httpHeader()
+    elif chose == 5:
+        DNSlookup()
+    elif chose == 6:
+        IPlocation()
+    elif chose == 7:
+        ELFP()
+    elif chose == 0:
+        sys.exit(0)
     else:
-        check = "'"
-        checker = requests.post(url+check)
-        if "MySQL" in checker.text:
-            print "[--] Found > %s" % (url)
-            Found = 1
-        elif "native client" in checker.text:
-            print "[--] Found > %s" % (url)
-            Found = 1
-        elif "syntax error" in checker.text:
-            print "[--] Found > %s" % (url)
-            Found = 1
-        elif "ORA" in checker.text:
-            print "[--] Found > %s" % (url)
-            Found = 1
-        elif "MariaDB" in checker.text:
-            print "[--] Found > %s" % (url)
-            Found = 1
-        elif "You have an error in your SQL syntax;" in checker.text:
-            print "[--] Found > %s" % (url)
-            Found = 1
-        else:
-            pass
-if Found == 0:
-    print "[--] SQL Injection Not Found!"
-else:
-    pass
+        print("\t└─\033[1;31m incorrect!\033[1;m")
+        main()
 
-print "\n[-] ./Port Scan"
-def PortsScan():
-    """thread Ports Scan function"""
-    for port in range(1, 1025):
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(0.2)
-        result = sock.connect_ex((IP, port))
-        if result == 0:
-            print("[--] Port %s: Open" % (port))
-        sock.close()
+    returnChose = str(input("\t└─────── \033[1;33mDo you want to continue Y/n:\033[1;m "))
+    if returnChose == 'Y' or returnChose == 'y':
+        main()
+    else:
+        sys.exit(0)
 
-threads = []
-t = threading.Thread(target=PortsScan)
-threads.append(t)
-t.start()
+if __name__ == '__main__':
+    main()
