@@ -117,7 +117,6 @@ def main():
 \t├──[5] DNS lookup
 \t├──[6] IP Location
 \t├──[7] Extract Links from Page
-\t├──[8] Does it use Cloudflare
 \t├──[0]\033[1;31m EXIT\033[1;m''')
 
     chose = int(input('\t└─  '))
