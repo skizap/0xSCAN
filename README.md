@@ -1,5 +1,5 @@
 # 0xSCAN
- 0xSCAN website scanner
+Beautiful 0xSCAN website scanner
 
 # screenshot
 
