@@ -1,5 +1,5 @@
 # 0xSCAN
- 0xSCAN website scanner
+ 0xSCAN website scanner - An Amazing Project
 
 # screenshot
 
