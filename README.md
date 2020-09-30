@@ -10,7 +10,7 @@
 python3 0xscan.py -d example.com
 
 ```
-# Developed by
+# Developed by our team:
 ``` bash
 Abdullah Alzahrani | Twitter: @0xAbdullah
 Saud Alanzi | Twitter: @Dmaral3noz
