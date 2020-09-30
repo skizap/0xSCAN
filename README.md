@@ -1,7 +1,7 @@
 # 0xSCAN
  0xSCAN website scanner
 
-# screenshot
+# Screenshot
 
 ![alt text](https://github.com/0xAbdullah/0xSCAN/blob/master/Screenshot.png)
 
@@ -10,7 +10,7 @@
 python3 0xscan.py -d example.com
 
 ```
-# Developed by
+# Developed By
 ``` bash
 Abdullah Alzahrani | Twitter: @0xAbdullah
 Saud Alanzi | Twitter: @Dmaral3noz
