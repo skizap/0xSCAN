@@ -1,4 +1,4 @@
-# 0xSCAN-GUPTAJI29 PROJECT
+# 0xSCAN-PRO
  0xSCAN website scanner
 
 # screenshot
