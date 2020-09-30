@@ -1,5 +1,5 @@
-# 0xSCAN
- 0xSCAN website scanner
+# SCANWEB - Web Analyzer
+ SCANWEB  a website scanner
 
 # screenshot
 
