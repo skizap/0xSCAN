@@ -15,3 +15,6 @@ python3 0xscan.py -d example.com
 Abdullah Alzahrani | Twitter: @0xAbdullah
 Saud Alanzi | Twitter: @Dmaral3noz
 ```
+# Pycharm by
+'''''Bash
+Deepanshu Gupta / github : white devil  007 a
