@@ -1,7 +1,7 @@
 # 0xSCAN
  0xSCAN website scanner
 
-# screenshot
+# screenshot of DOC
 
 ![alt text](https://github.com/0xAbdullah/0xSCAN/blob/master/Screenshot.png)
 
