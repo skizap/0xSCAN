@@ -1,4 +1,4 @@
-# 0xSCAN
+# 0xSCAN-PRO
  0xSCAN website scanner
 
 # screenshot
