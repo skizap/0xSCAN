@@ -34,7 +34,7 @@ if host.startswith('http'):
 
 ## ./START Scan common ports ##
 def commonPorts():
-    requ = requests.post("https://www.portcheckers.com/portscan-result", data={'server': host, "quick": "false"})
+    requ = requests.post("https://www.portcheckers.com/portscan-result", data = {'server': host, "quick": "false"})
     resp = requ.text
     output = re.sub('<pre>|\t|</pre>|<div style="margin:10px 0 20px 0;"><h3>Port Scan Result</h3>|'
                     '<span style="display: inline-block;width:200px;">|</span><span class="label label-danger">|</span>'
@@ -138,7 +138,7 @@ def main():
     elif chose == 0:
         sys.exit(0)
     else:
-        print("\t└─\033[1;31m incorrect!\033[1;m")
+        print("\t└─\033[1;31m incorrect!\033[1;m ")
         main()
 
     returnChose = str(input("\t└─────── \033[1;33mDo you want to continue Y/n:\033[1;m "))
