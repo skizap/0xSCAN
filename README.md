@@ -1,16 +1,21 @@
+#Website Scanner
+
 # 0xSCAN
  0xSCAN website scanner
 
-# screenshot
+# Screenshot
 
 ![alt text](https://github.com/0xAbdullah/0xSCAN/blob/master/Screenshot.png)
 
-# Usage
+# Using
 ```bash
-python3 0xscan.py -d example.com
+Developed with the help of python3 
+
+Here is the File of Scanner
+0xscan.py -d example.com
 
 ```
-# Developed by
+# Contributors
 ``` bash
 Abdullah Alzahrani | Twitter: @0xAbdullah
 Saud Alanzi | Twitter: @Dmaral3noz
