@@ -1,4 +1,4 @@
-# 0xSCAN
+# 0xSCAN// a very cool project
  0xSCAN website scanner
 
 # screenshot
