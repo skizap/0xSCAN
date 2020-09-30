@@ -1,4 +1,4 @@
-# 0xSCAN
+# 0xSCAN Free Website Scanner
  0xSCAN website scanner
 
 # screenshot
