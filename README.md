@@ -1,5 +1,5 @@
 # 0xSCAN
- 0xSCAN website scanner
+ 0xSCAN  a powerful and efficient website scanner.
 
 # screenshot
 
