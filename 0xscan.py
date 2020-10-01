@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # 0xScan v2.0
 # Developed by: Abdullah Alzahrani and Saud Alanzi
+# It is an Amazing project
 
 import argparse, requests, sys, re
 
