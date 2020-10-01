@@ -1,5 +1,5 @@
 # 0xSCAN-A scanner site
- 0xSCAN website scanner
+ 0xSCAN website scanner which make easy  scanning files, Docs, other important stuffs.
 
 # screenshot
 
