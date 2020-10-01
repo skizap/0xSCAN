@@ -1,5 +1,5 @@
 # 0xSCAN
- 0xSCAN website scanner
+ The Website Scanner For Gathering Information
 
 # screenshot
 
