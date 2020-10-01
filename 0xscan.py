@@ -53,7 +53,7 @@ def reverseIP():
     output = resp
     print("├── Host: {}".format(host))
     for lines in str(output).splitlines():
-        print("\t├── {}".format(lines))
+    print("\t├── {}".format(lines))
 ## ./END Reverse IP ##
 
 ## ./START http Header ##
@@ -63,7 +63,7 @@ def httpHeader():
     output = resp.strip().lstrip()
     print("├── Host: {}".format(host))
     for lines in str(output).splitlines():
-        print("\t├── {}".format(lines))
+    print("\t├── {}".format(lines))
 ## ./END http Header ##
 
 ## ./START TCP Port Scan ##
@@ -73,7 +73,7 @@ def TCPport():
     output = resp.strip().lstrip()
     print("├── Host: {}".format(host))
     for lines in str(output).splitlines():
-        print("\t├── {}".format(lines))
+    print("\t├── {}".format(lines))
 ## ./END TCP Port Scan ##
 
 ## ./START Extract Links from Page ##
@@ -83,7 +83,7 @@ def ELFP():
     output = resp.strip().lstrip()
     print("├── Host: {}".format(host))
     for lines in str(output).splitlines():
-        print("\t├── {}".format(lines))
+    print("\t├── {}".format(lines))
 ## ./END Extract Links from Page ##
 
 ## ./START Extract Links from Page ##
@@ -93,7 +93,7 @@ def IPlocation():
     output = resp.strip().lstrip()
     print("├── Host: {}".format(host))
     for lines in str(output).splitlines():
-        print("\t├── {}".format(lines))
+    print("\t├── {}".format(lines))
 
 ## ./END Extract Links from Page ##
 
@@ -104,7 +104,7 @@ def DNSlookup():
     output = re.sub(';; Truncated, retrying in TCP mode.', '', resp).strip().lstrip()
     print("├── Host: {}".format(host))
     for lines in str(output).splitlines():
-        print("\t├── {}".format(lines))
+    print("\t├── {}".format(lines))
 ## ./END DNS lookup ##
 
 def main():
