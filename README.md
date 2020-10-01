@@ -1,4 +1,4 @@
-# 0xSCAN
+# 0xSCAN-A scanner site
  0xSCAN website scanner
 
 # screenshot
